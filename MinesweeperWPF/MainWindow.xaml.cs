@@ -20,9 +20,51 @@ namespace MinesweeperWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static int gridSize;
+        private static int mineCount;
+        private static string playerName;
+        private static Grid gameGrid;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public void SetGameInfo(string name, int gridS, int mineC)
+        {
+            playerName = name;
+            gridSize = gridS;
+            mineCount = mineC;
+
+            DrawGrid();
+        }
+
+        private void DrawGrid()
+        {
+            int count = 1;
+
+            for (int i = 0; i < gridSize; i++)
+            {
+                for (int j = 0; j < gridSize; j++)
+                {
+                    Button MyControl1 = new Button();
+                    MyControl1.Name = "Button" + count.ToString();
+                    MyControl1.FontSize = 11;
+                    MyControl1.Width = 40;
+                    MyControl1.Height = 50;
+
+                    Grid.SetColumn(MyControl1, j);
+                    Grid.SetRow(MyControl1, i);
+                    minesweeperGrid.Children.Add(MyControl1);
+
+                    count++;
+                }
+            }
+        }
+
+        void button_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
         }
     }
 }
