@@ -49,8 +49,8 @@ namespace MinesweeperWPF
                     Button MyControl1 = new Button();
                     MyControl1.Name = "Button" + count.ToString();
                     MyControl1.FontSize = 11;
-                    MyControl1.Width = 40;
-                    MyControl1.Height = 50;
+                    MyControl1.Width = 60;
+                    MyControl1.Height = 80;
 
                     Grid.SetColumn(MyControl1, j);
                     Grid.SetRow(MyControl1, i);

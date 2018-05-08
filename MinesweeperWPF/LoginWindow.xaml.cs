@@ -35,27 +35,33 @@ namespace MinesweeperWPF
                 else
                 {
                     playerName = textBoxUsername.Text;
-                    MainWindow mainWindow = new MainWindow();
 
                     if ((bool)(easyRb.IsChecked))
                     {
-                        mainWindow.SetGameInfo(playerName, 10, 30);
-                        mainWindow.Show();
+                        ConfigAndOpenMainWindow(playerName, 10, 30);
                     }
                     else if ((bool)(mediumRb.IsChecked))
                     {
-                        mainWindow.SetGameInfo(playerName, 12, 45);
-                        mainWindow.Show();
+                        ConfigAndOpenMainWindow(playerName, 12, 45);
                     }
                     else if ((bool)(hardRb.IsChecked))
                     {
-                        mainWindow.SetGameInfo(playerName, 14, 60);
-                        mainWindow.Show();
+                        ConfigAndOpenMainWindow(playerName, 14, 60);
                     }
                 }
             }
             else
                 playButton.Content = "Please select a difficulty before playing!";
+        }
+
+        void ConfigAndOpenMainWindow(string playerName, int gridSize, int mineCount)
+        {
+            MainWindow mainWindow = new MainWindow();
+
+            mainWindow.SetGameInfo(playerName, 10, 30);
+            mainWindow.Show();
+            mainWindow.Closing += (s, args) => this.Close();
+            this.Hide();
         }
     }
 }
