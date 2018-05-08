@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MinesweeperWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="600">
+        Title="MainWindow" Height="900" Width="600"
+        ResizeMode="NoResize"
+        Background="DarkGray">
     <Grid Name="mainGrid">
         <Grid Name="topGrid" HorizontalAlignment="Center">
             <Grid.RowDefinitions>

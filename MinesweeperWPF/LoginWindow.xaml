@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MinesweeperWPF"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="740">
+        Title="LoginWindow" Height="450" Width="740"
+        ResizeMode="NoResize"
+        Background="LightGray">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -20,13 +22,13 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Image HorizontalAlignment="Left" Height="167" Margin="205,8,0,0" VerticalAlignment="Top" Width="403" Source="Assets/minesweeper-logo.png" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
-        <TextBlock Margin="162,84,218,0" Grid.Row="1" Text="Name: " Grid.ColumnSpan="2" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Grid.RowSpan="2" />
-        <TextBox Name="textBoxUsername" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Margin="196,80,0,0" Grid.Row="1" FontSize="16" Text="Your name here..." VerticalAlignment="Top" Width="235"/>
+        <TextBlock Margin="191,85,189,0" Grid.Row="1" Text="Name: " Grid.ColumnSpan="2" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Grid.RowSpan="2" />
+        <TextBox Name="textBoxUsername" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Margin="125,82,0,0" Grid.Row="1" FontSize="16" VerticalAlignment="Top" Width="235" Grid.RowSpan="2"/>
 
         <RadioButton Name="easyRb" Content="Easy (10x10, 30 mines)" FontSize="16" Grid.ColumnSpan="1" HorizontalAlignment="Left" Margin="30,50,0,0" Grid.Row="2" VerticalAlignment="Top"/>
         <RadioButton Name="mediumRb" Content="Medium (12x12, 45 mines)" FontSize="16" Grid.ColumnSpan="1" HorizontalAlignment="Left" Margin="30,50,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.Column="1"/>
         <RadioButton Name="hardRb" Content="Hard (14x14, 60 mines)" FontSize="16" Grid.ColumnSpan="1" HorizontalAlignment="Left" Margin="30,50,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.Column="2"/>
-        <Button Name="playButton" FontSize="16" Click="Button_Click" Content="Play" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Grid.Row="3" Grid.ColumnSpan="3" Width="250"/>
+        <Button Name="playButton" FontSize="16" Click="Button_Click" Content="Play" Margin="210,30,217,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Grid.Row="3" Grid.ColumnSpan="3" Width="305"/>
 
     </Grid>
 </Window>

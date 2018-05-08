@@ -23,7 +23,6 @@ namespace MinesweeperWPF
         private static int gridSize;
         private static int mineCount;
         private static string playerName;
-        private static Grid gameGrid;
 
         public MainWindow()
         {
