@@ -5,61 +5,123 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MinesweeperWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="600"
+        Title="MainWindow" Height="800" Width="600"
         ResizeMode="NoResize"
         Background="DarkGray">
+
+    <Window.Resources>
+        <Image Source="Assets/flag.gif" x:Key="img_flag"></Image>
+        <Image Source="Assets/badflag.gif" x:Key="img_badflag"></Image>
+        <Image Source="Assets/goodflag.gif" x:Key="img_goodflag"></Image>
+        <Image Source="Assets/mine.gif" x:Key="img_mine"></Image>
+        <Image Source="Assets/gameover-emoji.png" x:Key="img_gameover_emoji"></Image>
+        <Image Source="Assets/mineclicked-emoji.png" x:Key="img_mineclicked_emoji"></Image>
+        <Image Source="Assets/mineopening-emoji.png" x:Key="img_mineopening_emoji"></Image>
+        <Image Source="Assets/neutral-emoji.png" x:Key="img_neutral_emoji"></Image>
+        <Image Source="Assets/explosion.gif" x:Key="img_explosion"></Image>
+    </Window.Resources>
+
     <Grid Name="mainGrid">
-        <Grid Name="topGrid" HorizontalAlignment="Center">
+        <Grid Name="topGrid"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top"
+              Height="80"
+        >
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Canvas 
+                Width="600" 
+                Background="Aqua" 
+                Grid.ColumnSpan="3"
+            />
+
+            <TextBlock 
+                Name="remainingMinesTextBlock"
+                Text="60"
+                TextBlock.Foreground="Red"
+                Grid.Column="0"
+                FontSize="36"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontFamily="Consolas"
+            />
+
+            <ToggleButton 
+                Name="enableFlagButton"
+                ToggleButton.Checked="enableFlagButton_Checked"
+                ToggleButton.Unchecked="enableFlagButton_Unchecked"
+                Grid.Column="1"
+                Height="50"
+                Width="100"
+                Content="{StaticResource img_flag}"
+            />
+
+            <Button
+                Name="buttonReset"
+                Grid.Column="2"
+                Height="60"
+                Width="60"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="{StaticResource img_neutral_emoji}"
+                Click="buttonReset_Click"
+            />
+
+        </Grid>
+
+        <Grid Name="minesweeperGrid" 
+              HorizontalAlignment="Center" 
+              VerticalAlignment="Center" 
+        >
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
         </Grid>
 
-        <Grid Name="minesweeperGrid" Height="600" HorizontalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-        </Grid>
-
-        <Grid Name="bottomGrid" HorizontalAlignment="Center">
+        <Grid Name="bottomGrid"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Bottom"
+              Height="80">
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -68,6 +130,33 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+
+            <Canvas
+                Background="IndianRed"
+                Width="600" 
+                Grid.ColumnSpan="3"
+            />
+
+            <Button
+                Name="buttonLeaderboard"
+                Content="Leaderboard"
+                FontSize="22"
+                Width="180"
+                Height="60"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Click="buttonLeaderboard_Click"
+            />
+
+            <TextBlock
+                Name="timerTextBlock"
+                Text="100"
+                FontSize="36"
+                FontFamily="Consolas"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+            />
         </Grid>
     </Grid>
 </Window>

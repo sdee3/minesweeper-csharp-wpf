@@ -66,6 +66,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="ToggleSwitch, Version=1.1.2.0, Culture=neutral, PublicKeyToken=8637099990568f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\ToggleSwitch.1.1.2\lib\net40-client\ToggleSwitch.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -115,6 +118,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -133,9 +137,6 @@
     <Resource Include="logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\mine.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
@@ -148,7 +149,21 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\flag.png" />
+    <Resource Include="Assets\explosion.gif" />
+    <Resource Include="Assets\mine.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\badflag.gif" />
+    <Resource Include="Assets\goodflag.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\flag.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\mineopening-emoji.png" />
+    <Resource Include="Assets\gameover-emoji.png" />
+    <Resource Include="Assets\mineclicked-emoji.png" />
+    <Resource Include="Assets\neutral-emoji.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

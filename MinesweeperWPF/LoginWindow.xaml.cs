@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace MinesweeperWPF
 {
-    /// <summary>
-    /// Interaction logic for LoginWindow.xaml
-    /// </summary>
     public partial class LoginWindow : Window
     {
         private string playerName;
@@ -58,7 +55,7 @@ namespace MinesweeperWPF
         {
             MainWindow mainWindow = new MainWindow();
 
-            mainWindow.SetGameInfo(playerName, 10, 30);
+            mainWindow.SetGameInfo(playerName, gridSize, mineCount);
             mainWindow.Show();
             mainWindow.Closing += (s, args) => this.Close();
             this.Hide();
