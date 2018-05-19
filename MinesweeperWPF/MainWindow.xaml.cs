@@ -19,28 +19,28 @@ namespace MinesweeperWPF
 {
     public partial class MainWindow : Window
     {
-        private static int gridSize;
+        private static int columnCount;
+        private static int rowCount;
         private static int mineCount;
         private static string playerName;
         private static Random random;
 
-        private bool gameStarted;
         private Color[] mineText;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            gameStarted = false;
-            mineText = new Color[] {Colors.White /* first doesn't matter */,
-                                    Colors.Blue, Colors.DarkGreen, Colors.Red, Colors.DarkBlue,
-                                    Colors.DarkViolet, Colors.DarkCyan, Colors.Brown, Colors.Black };
         }
 
-        public void SetGameInfo(string name, int gridS, int mineC)
+        public MainWindow(string pName) : this()
         {
-            playerName = name;
-            gridSize = gridS;
+            playerName = pName;
+        }
+
+        public void SetGameInfo(int cols, int rows, int mineC)
+        {
+            columnCount = cols;
+            rowCount = rows;
             mineCount = mineC;
 
             random = new Random();
@@ -50,17 +50,17 @@ namespace MinesweeperWPF
 
         private void SetupAndDraw()
         {
-            MineGrid game = new MineGrid(gridSize, gridSize, mineCount);
+            MineGrid game = new MineGrid(columnCount, rowCount, mineCount);
 
-            for (int i = 0; i < gridSize; i++)
+            for (int i = 0; i < columnCount; i++)
                 minesweeperGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
-            for (int i = 0; i < gridSize; i++)
+            for (int i = 0; i < rowCount; i++)
                 minesweeperGrid.RowDefinitions.Add(new RowDefinition());
 
-            for (int i = 0; i < gridSize; i++)
+            for (int i = 0; i < columnCount; i++)
             {
-                for (int j = 0; j < gridSize; j++)
+                for (int j = 0; j < rowCount; j++)
                 {
                     Grid.SetColumn(game.ButtonArray[i,j], j);
                     Grid.SetRow(game.ButtonArray[i, j], i);
