@@ -90,8 +90,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Celija.cs" />
-    <Compile Include="GridCelija.cs" />
+    <Compile Include="IGame.cs" />
+    <Compile Include="IPlate.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -101,6 +101,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MinesGrid.cs" />
+    <Compile Include="MinesweeperException.cs" />
+    <Compile Include="Plate.cs" />
+    <Compile Include="PlateEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
