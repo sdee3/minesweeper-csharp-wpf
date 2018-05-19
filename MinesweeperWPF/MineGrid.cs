@@ -23,7 +23,7 @@ namespace MinesweeperWPF
 
             this.ColumnCount = columns;
             this.RowCount = rows;
-            this.MineCount = 5;
+            this.MineCount = mineCount;
 
             this.ButtonArray = new MinesweeperButton[this.ColumnCount, this.RowCount];
             for (int i = 0; i < this.ColumnCount; i++)

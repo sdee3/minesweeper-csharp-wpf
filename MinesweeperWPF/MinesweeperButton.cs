@@ -33,7 +33,8 @@ namespace MinesweeperWPF
             this.IsRevealed = true;
             if (this.IsMine) this.Content = "*";
             else this.Content = (this.SurroundingMineCount > 0) ? (this.SurroundingMineCount.ToString()) : "";
-            this.Background = Brushes.DarkGray;
+
+            this.Background = this.IsMine ? Brushes.IndianRed : Brushes.DarkGray;
         }
 
         public void CountMines(int ColumnCount, int RowCount, MinesweeperButton[,] ButtonArray)
