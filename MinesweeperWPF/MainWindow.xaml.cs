@@ -24,8 +24,7 @@ namespace MinesweeperWPF
         private static int mineCount;
         private static string playerName;
         private static Random random;
-
-        private Color[] mineText;
+        private static MineGrid game;
 
         public MainWindow()
         {
@@ -45,18 +44,18 @@ namespace MinesweeperWPF
 
             random = new Random();
 
-            SetupAndDraw();
-        }
-
-        private void SetupAndDraw()
-        {
-            MineGrid game = new MineGrid(columnCount, rowCount, mineCount);
-
             for (int i = 0; i < columnCount; i++)
                 minesweeperGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
             for (int i = 0; i < rowCount; i++)
                 minesweeperGrid.RowDefinitions.Add(new RowDefinition());
+
+            SetupAndDraw();
+        }
+
+        private void SetupAndDraw()
+        {
+            game = new MineGrid(columnCount, rowCount, mineCount);
 
             for (int i = 0; i < columnCount; i++)
             {
@@ -68,11 +67,6 @@ namespace MinesweeperWPF
                 }
             }
             
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void BoardButton_Focus(object sender, RoutedEventArgs e)

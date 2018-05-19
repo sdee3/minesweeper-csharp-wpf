@@ -23,7 +23,7 @@ namespace MinesweeperWPF
 
             this.ColumnCount = columns;
             this.RowCount = rows;
-            this.MineCount = mineCount;
+            this.MineCount = 5;
 
             this.ButtonArray = new MinesweeperButton[this.ColumnCount, this.RowCount];
             for (int i = 0; i < this.ColumnCount; i++)
@@ -31,6 +31,8 @@ namespace MinesweeperWPF
                 for (int j = 0; j < this.RowCount; j++)
                 {
                     this.ButtonArray[i, j] = new MinesweeperButton();
+                    this.ButtonArray[i, j].ColumnValue = i;
+                    this.ButtonArray[i, j].RowValue = j;
                     this.ButtonArray[i, j].Name = "Button" + i.ToString() + "_" + j.ToString();
                     this.ButtonArray[i, j].Content = ""; // clears flag or bomb image (if any)
                     this.ButtonArray[i, j].Width = this.ButtonArray[i, j].Height = 30;
@@ -56,6 +58,10 @@ namespace MinesweeperWPF
 
                 ButtonArray[column, row].SetMineOnButton();
             }
+
+            for (int i = 0; i < this.ColumnCount; i++)
+                for (int j = 0; j < this.RowCount; j++)
+                    this.ButtonArray[i, j].CountMines(this.ColumnCount, this.RowCount, this.ButtonArray);
         }
 
         private void BoardButton_Focus(object sender, RoutedEventArgs e)
@@ -65,7 +71,45 @@ namespace MinesweeperWPF
 
         private void BoardButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MinesweeperButton toggledButton = sender as MinesweeperButton;
+
+            toggledButton.ToggleRevealed();
+            if (toggledButton.SurroundingMineCount == 0) RevealAllBlanks(toggledButton);
+            if (toggledButton.IsMine) GameOver();
         }
+
+        private void GameOver()
+        {
+            for (var i = 0; i < this.ColumnCount; i++)
+                for (var j = 0; j < this.RowCount; j++)
+                    this.ButtonArray[i, j].ToggleRevealed();
+        }
+
+        private void RevealAllBlanks(MinesweeperButton toggledButton)
+        {
+            for (int xoff = -1; xoff <= 1; xoff++)
+            {
+                int i = toggledButton.ColumnValue + xoff;
+                if (i < 0 || i >= this.ColumnCount) continue;
+
+                for (int yoff = -1; yoff <= 1; yoff++)
+                {
+                    int j = toggledButton.RowValue + yoff;
+                    if (j < 0 || j >= this.RowCount) continue;
+
+                    MinesweeperButton neighbor = this.ButtonArray[i, j];
+
+                    if (!neighbor.IsRevealed)
+                    {
+                        neighbor.ToggleRevealed();
+
+                        if (neighbor.SurroundingMineCount == 0 && !neighbor.IsMine)
+                            RevealAllBlanks(neighbor);
+                    }
+                }
+            }
+        }
+
+       
     }
 }
