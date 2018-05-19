@@ -81,41 +81,6 @@
               HorizontalAlignment="Center" 
               VerticalAlignment="Center" 
         >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30" />
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-            </Grid.ColumnDefinitions>
         </Grid>
 
         <Grid Name="bottomGrid"
