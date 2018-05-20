@@ -78,7 +78,7 @@ namespace MinesweeperWPF
             StackPanel stackPanel = new StackPanel();
             stackPanel.Orientation = Orientation.Horizontal;
             Image flagImage = new Image();
-            flagImage.Source = GenerateImage(@"..\..\Assets\flag.gif");
+            flagImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\flag.gif");
 
             stackPanel.Children.Add(flagImage);
 
@@ -106,16 +106,6 @@ namespace MinesweeperWPF
                 toggledButton.Content = "";
                 buttonReset.Content = FindResource("neutral_emoji");
             }
-        }
-
-        private ImageSource GenerateImage(string path)
-        {
-            BitmapImage bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri(@path, UriKind.Relative);
-            bitmapImage.EndInit();
-
-            return bitmapImage;
         }
 
         private void BoardButton_Focus(object sender, RoutedEventArgs e)

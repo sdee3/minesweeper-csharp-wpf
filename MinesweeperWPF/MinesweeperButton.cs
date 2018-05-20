@@ -38,7 +38,17 @@ namespace MinesweeperWPF
         public void ToggleRevealed()
         {
             this.IsRevealed = true;
-            if (this.IsMine) this.Content = "*";
+            if (this.IsMine)
+            {
+                StackPanel stackPanel = new StackPanel();
+                stackPanel.Orientation = Orientation.Horizontal;
+                Image mineImage = new Image();
+                mineImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\mine.gif");
+
+                stackPanel.Children.Add(mineImage);
+
+                this.Content = stackPanel;
+            }
             else this.Content = (this.SurroundingMineCount > 0) ? (this.SurroundingMineCount.ToString()) : "";
 
             this.Background = this.IsMine ? Brushes.IndianRed : Brushes.DarkGray;
