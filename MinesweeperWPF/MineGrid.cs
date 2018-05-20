@@ -14,6 +14,7 @@ namespace MinesweeperWPF
         public int ColumnCount { get; private set; }
         public int RowCount { get; private set; }
         public int MineCount { get; private set; }
+        public int FlagCount { get; private set; }
         public bool IsMine { get; private set; }
         private Random random;
 
@@ -24,6 +25,7 @@ namespace MinesweeperWPF
             this.ColumnCount = columns;
             this.RowCount = rows;
             this.MineCount = mineCount;
+            this.FlagCount = mineCount;
 
             this.ButtonArray = new MinesweeperButton[this.ColumnCount, this.RowCount];
             for (int i = 0; i < this.ColumnCount; i++)
@@ -94,6 +96,15 @@ namespace MinesweeperWPF
             }
         }
 
-       
+        public int DecrementFlagCounter()
+        {
+            return --this.FlagCount;
+        }
+
+        public int IncrementFlagCounter()
+        {
+            return ++this.FlagCount;
+        }
+
     }
 }

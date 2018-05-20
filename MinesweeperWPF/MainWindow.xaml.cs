@@ -68,7 +68,8 @@ namespace MinesweeperWPF
                     minesweeperGrid.Children.Add(game.ButtonArray[i, j]);
                 }
             }
-            
+
+            remainingMinesTextBlock.Text = game.FlagCount.ToString();
         }
 
         private void BoardButton_Click(object sender, RoutedEventArgs e)
@@ -84,9 +85,23 @@ namespace MinesweeperWPF
 
             if (!toggledButton.IsFlagged && (enableFlagButton.IsChecked ?? false))
             {
-                toggledButton.ToggleFlagOnButton();
-                toggledButton.Content = stackPanel;
-                buttonReset.Content = FindResource("neutral_emoji");
+                if(game.FlagCount > 0)
+                {
+                    remainingMinesTextBlock.Text = game.DecrementFlagCounter().ToString();
+                    toggledButton.ToggleFlagOnButton();
+                    toggledButton.Content = stackPanel;
+                    buttonReset.Content = FindResource("neutral_emoji");
+
+                    if (game.FlagCount == 0)
+                    {
+                        remainingMinesImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\badflag.png");
+                    }   
+                }      
+                else
+                {
+                    MessageBox.Show("You have no more flags left.");
+                    buttonReset.Content = FindResource("neutral_emoji");
+                }
             }
             else if(!toggledButton.IsFlagged)
             {
@@ -103,8 +118,11 @@ namespace MinesweeperWPF
             else if(toggledButton.IsFlagged && (enableFlagButton.IsChecked ?? false))
             {
                 toggledButton.ToggleFlagOnButton();
+                remainingMinesTextBlock.Text = game.IncrementFlagCounter().ToString();
                 toggledButton.Content = "";
                 buttonReset.Content = FindResource("neutral_emoji");
+
+                remainingMinesImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\goodflag.png");
             }
         }
 
