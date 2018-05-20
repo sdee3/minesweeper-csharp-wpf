@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="600"
         ResizeMode="NoResize"
-        Background="DarkGray">
+        Background="MintCream">
 
     <Window.Resources>
         <Image Source="Assets/flag.gif" x:Key="flag"></Image>
@@ -19,6 +19,17 @@
         <Image Source="Assets/mineopening-emoji.png" x:Key="mineopening_emoji"></Image>
         <Image Source="Assets/neutral-emoji.png" x:Key="neutral_emoji"></Image>
         <Image Source="Assets/explosion.gif" x:Key="img_explosion"></Image>
+
+        <Style x:Key="buttonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style x:Key="toggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
     </Window.Resources>
 
     <Grid Name="mainGrid">
@@ -39,19 +50,19 @@
 
             <Canvas 
                 Width="600" 
-                Background="Aqua" 
+                Background="Azure" 
                 Grid.ColumnSpan="3"
             />
 
             <TextBlock 
                 Name="remainingMinesTextBlock"
                 Text="0"
-                TextBlock.Foreground="Red"
+                TextBlock.Foreground="DarkGreen"
                 Grid.Column="0"
                 FontSize="36"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontFamily="Consolas" Margin="-70,0,0,0"
+                Margin="-70,0,0,0"
             />
             
             <Image 
@@ -72,6 +83,7 @@
                 Height="50"
                 Width="100"
                 Content="{StaticResource flag}"
+                Style="{StaticResource toggleButtonStyle}"
             />
 
             <Button
@@ -83,6 +95,7 @@
                 VerticalAlignment="Center"
                 Content="{StaticResource neutral_emoji}"
                 Click="buttonReset_Click"
+                Style="{StaticResource buttonStyle}"
             >
             </Button>
 
@@ -90,7 +103,7 @@
 
         <Grid Name="minesweeperGrid" 
               HorizontalAlignment="Center" 
-              VerticalAlignment="Center" 
+              VerticalAlignment="Center"
         >
         </Grid>
 
@@ -109,7 +122,7 @@
             </Grid.ColumnDefinitions>
 
             <Canvas
-                Background="IndianRed"
+                Background="CornflowerBlue"
                 Width="600" 
                 Grid.ColumnSpan="3"
             />
@@ -117,19 +130,27 @@
             <Button
                 Name="buttonLeaderboard"
                 Content="Leaderboard"
-                FontSize="22"
+                FontSize="24"
                 Width="180"
                 Height="60"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Click="buttonLeaderboard_Click"
-            />
+            >
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FFD9EDFF" Offset="0"/>
+                        <GradientStop Color="#FFC0DEFF" Offset="0.445"/>
+                        <GradientStop Color="#FFAFD1F8" Offset="0.53"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+
+            </Button>
 
             <TextBlock
                 Name="timerTextBlock"
-                Text="100"
+                Text="0"
                 FontSize="36"
-                FontFamily="Consolas"
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"

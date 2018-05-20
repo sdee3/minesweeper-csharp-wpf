@@ -37,21 +37,25 @@ namespace MinesweeperWPF
 
         public void ToggleRevealed()
         {
-            this.IsRevealed = true;
-            if (this.IsMine)
+            if(!this.IsFlagged)
             {
-                StackPanel stackPanel = new StackPanel();
-                stackPanel.Orientation = Orientation.Horizontal;
-                Image mineImage = new Image();
-                mineImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\mine.gif");
+                this.IsRevealed = true;
 
-                stackPanel.Children.Add(mineImage);
+                if (this.IsMine)
+                {
+                    StackPanel stackPanel = new StackPanel();
+                    stackPanel.Orientation = Orientation.Horizontal;
+                    Image mineImage = new Image();
+                    mineImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\mine.gif");
 
-                this.Content = stackPanel;
-            }
-            else this.Content = (this.SurroundingMineCount > 0) ? (this.SurroundingMineCount.ToString()) : "";
+                    stackPanel.Children.Add(mineImage);
 
-            this.Background = this.IsMine ? Brushes.IndianRed : Brushes.DarkGray;
+                    this.Content = stackPanel;
+                }
+                else this.Content = (this.SurroundingMineCount > 0) ? (this.SurroundingMineCount.ToString()) : "";
+
+                this.Background = this.IsMine ? Brushes.IndianRed : Brushes.DarkGray;
+            }   
         }
 
         public void CountMines(int ColumnCount, int RowCount, MinesweeperButton[,] ButtonArray)

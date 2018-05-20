@@ -40,7 +40,7 @@ namespace MinesweeperWPF
         {
             columnCount = cols;
             rowCount = rows;
-            mineCount = mineC;
+            mineCount = 4;
 
             random = new Random();
 
@@ -85,6 +85,7 @@ namespace MinesweeperWPF
 
             if (!toggledButton.IsFlagged && (enableFlagButton.IsChecked ?? false))
             {
+                // If the target button is not flagged and the EnableFlagButton is turned ON
                 if(game.FlagCount > 0)
                 {
                     remainingMinesTextBlock.Text = game.DecrementFlagCounter().ToString();
@@ -94,6 +95,7 @@ namespace MinesweeperWPF
 
                     if (game.FlagCount == 0)
                     {
+                        remainingMinesTextBlock.Foreground = Brushes.IndianRed;
                         remainingMinesImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\badflag.png");
                     }   
                 }      
@@ -105,6 +107,7 @@ namespace MinesweeperWPF
             }
             else if(!toggledButton.IsFlagged)
             {
+                // If the target button is not flagged and the EnableFlagButton is turned OFF
                 toggledButton.ToggleRevealed();
                 if (toggledButton.SurroundingMineCount == 0) game.RevealAllBlanks(toggledButton);
                 if (toggledButton.IsMine)
@@ -117,8 +120,10 @@ namespace MinesweeperWPF
             }
             else if(toggledButton.IsFlagged && (enableFlagButton.IsChecked ?? false))
             {
+                // If the target button IS FLAGGED and the EnableFlagButton is turned ON
                 toggledButton.ToggleFlagOnButton();
                 remainingMinesTextBlock.Text = game.IncrementFlagCounter().ToString();
+                remainingMinesTextBlock.Foreground = Brushes.DarkGreen;
                 toggledButton.Content = "";
                 buttonReset.Content = FindResource("neutral_emoji");
 
