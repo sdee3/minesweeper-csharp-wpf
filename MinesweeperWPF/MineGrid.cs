@@ -66,9 +66,31 @@ namespace MinesweeperWPF
 
         public void GameOver()
         {
+            StackPanel goodFlagStackPanel = new StackPanel();
+            StackPanel badFlagStackPanel = new StackPanel();
+            goodFlagStackPanel.Orientation = badFlagStackPanel.Orientation = Orientation.Horizontal;
+
+            Image goodFlagImage = new Image();
+            Image badFlagImage = new Image();
+
+            goodFlagImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\goodflag.png");
+            goodFlagStackPanel.Children.Add(goodFlagImage);
+            badFlagImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\badflag.png");
+            badFlagStackPanel.Children.Add(badFlagImage);
+
             for (var i = 0; i < this.ColumnCount; i++)
                 for (var j = 0; j < this.RowCount; j++)
+                {
                     this.ButtonArray[i, j].ToggleRevealed();
+                    this.ButtonArray[i, j].IsEnabled = false;
+                    if (this.ButtonArray[i, j].IsFlagged)
+                    {
+                        if (this.ButtonArray[i, j].IsMine)
+                            this.ButtonArray[i, j].Content = goodFlagStackPanel;
+                        else
+                            this.ButtonArray[i, j].Content = badFlagStackPanel;
+                    }                        
+                }  
         }
 
         public void RevealAllBlanks(MinesweeperButton toggledButton)

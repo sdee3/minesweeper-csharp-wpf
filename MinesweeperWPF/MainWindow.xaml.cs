@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace MinesweeperWPF
 {
@@ -22,9 +24,12 @@ namespace MinesweeperWPF
         private static int columnCount;
         private static int rowCount;
         private static int mineCount;
+        private static int secondsElapsed;
         private static string playerName;
         private static Random random;
         private static MineGrid game;
+
+        private static DispatcherTimer gameTimer;
 
         public MainWindow()
         {
@@ -42,6 +47,10 @@ namespace MinesweeperWPF
             rowCount = rows;
             mineCount = 4;
 
+            gameTimer = new DispatcherTimer();
+            gameTimer.Tick += gameTimer_Tick;
+            gameTimer.Interval = new TimeSpan(0, 0, 1);
+
             random = new Random();
 
             for (int i = 0; i < columnCount; i++)
@@ -53,8 +62,15 @@ namespace MinesweeperWPF
             SetupAndDraw();
         }
 
+        private void gameTimer_Tick(object sender, EventArgs e)
+        {
+            timerTextBlock.Text = (++secondsElapsed).ToString();
+        }
+
         private void SetupAndDraw()
         {
+            secondsElapsed = 0;
+            timerTextBlock.Text = "0";
             game = new MineGrid(columnCount, rowCount, mineCount);
 
             for (int i = 0; i < columnCount; i++)
@@ -70,6 +86,7 @@ namespace MinesweeperWPF
             }
 
             remainingMinesTextBlock.Text = game.FlagCount.ToString();
+            gameTimer.Start();
         }
 
         private void BoardButton_Click(object sender, RoutedEventArgs e)
@@ -149,7 +166,7 @@ namespace MinesweeperWPF
 
         private void buttonLeaderboard_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show(File.ReadAllText(@"..\..\Assets\leaderboard.dat"));
         }
 
         private void buttonReset_Click(object sender, RoutedEventArgs e)
