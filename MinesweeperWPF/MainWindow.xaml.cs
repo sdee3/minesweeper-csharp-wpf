@@ -63,28 +63,75 @@ namespace MinesweeperWPF
                 {
                     Grid.SetColumn(game.ButtonArray[i,j], j);
                     Grid.SetRow(game.ButtonArray[i, j], i);
+                    game.ButtonArray[i, j].Click += BoardButton_Click;
+                    game.ButtonArray[i, j].GotFocus += BoardButton_Focus;
                     minesweeperGrid.Children.Add(game.ButtonArray[i, j]);
                 }
             }
             
         }
 
+        private void BoardButton_Click(object sender, RoutedEventArgs e)
+        {
+            MinesweeperButton toggledButton = sender as MinesweeperButton;
+
+            StackPanel stackPanel = new StackPanel();
+            stackPanel.Orientation = Orientation.Horizontal;
+            Image flagImage = new Image();
+            flagImage.Source = GenerateImage(@"..\..\Assets\flag.gif");
+
+            stackPanel.Children.Add(flagImage);
+
+            if (!toggledButton.IsFlagged && (enableFlagButton.IsChecked ?? false))
+            {
+                toggledButton.ToggleFlagOnButton();
+                toggledButton.Content = stackPanel;
+                buttonReset.Content = FindResource("neutral_emoji");
+            }
+            else if(!toggledButton.IsFlagged)
+            {
+                toggledButton.ToggleRevealed();
+                if (toggledButton.SurroundingMineCount == 0) game.RevealAllBlanks(toggledButton);
+                if (toggledButton.IsMine)
+                {
+                    buttonReset.Content = FindResource("mineclicked_emoji");
+                    game.GameOver();
+                }
+                else
+                    buttonReset.Content = FindResource("neutral_emoji");
+            }
+            else if(toggledButton.IsFlagged && (enableFlagButton.IsChecked ?? false))
+            {
+                toggledButton.ToggleFlagOnButton();
+                toggledButton.Content = "";
+                buttonReset.Content = FindResource("neutral_emoji");
+            }
+        }
+
+        private ImageSource GenerateImage(string path)
+        {
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = new Uri(@path, UriKind.Relative);
+            bitmapImage.EndInit();
+
+            return bitmapImage;
+        }
+
         private void BoardButton_Focus(object sender, RoutedEventArgs e)
         {
             if (((Button)sender).IsFocused)
-                buttonReset.Content = FindResource("img_mineopening_emoji");
-            else
-                buttonReset.Content = FindResource("img_neutral_emoji");
+                buttonReset.Content = FindResource("mineopening_emoji");
         }
 
         private void enableFlagButton_Checked(object sender, RoutedEventArgs e)
         {
-
+            enableFlagButton.Content = FindResource("goodflag");
         }
 
         private void enableFlagButton_Unchecked(object sender, RoutedEventArgs e)
         {
-            
+            enableFlagButton.Content = FindResource("flag");
         }
 
         private void buttonLeaderboard_Click(object sender, RoutedEventArgs e)
@@ -94,6 +141,7 @@ namespace MinesweeperWPF
 
         private void buttonReset_Click(object sender, RoutedEventArgs e)
         {
+            buttonReset.Content = FindResource("neutral_emoji");
             SetupAndDraw();
         }
     }

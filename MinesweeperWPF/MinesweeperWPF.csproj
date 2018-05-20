@@ -154,10 +154,6 @@
     <Resource Include="Assets\mine.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\badflag.gif" />
-    <Resource Include="Assets\goodflag.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\flag.gif" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +161,10 @@
     <Resource Include="Assets\gameover-emoji.png" />
     <Resource Include="Assets\mineclicked-emoji.png" />
     <Resource Include="Assets\neutral-emoji.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\badflag.png" />
+    <Resource Include="Assets\goodflag.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

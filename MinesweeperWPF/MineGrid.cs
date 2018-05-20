@@ -36,9 +36,7 @@ namespace MinesweeperWPF
                     this.ButtonArray[i, j].Name = "Button" + i.ToString() + "_" + j.ToString();
                     this.ButtonArray[i, j].Content = ""; // clears flag or bomb image (if any)
                     this.ButtonArray[i, j].Width = this.ButtonArray[i, j].Height = 30;
-                    this.ButtonArray[i, j].Click += BoardButton_Click;
                     this.ButtonArray[i, j].IsEnabled = true; // button gets clickable
-                    this.ButtonArray[i, j].GotFocus += BoardButton_Focus;
                 }
             }
 
@@ -64,28 +62,14 @@ namespace MinesweeperWPF
                     this.ButtonArray[i, j].CountMines(this.ColumnCount, this.RowCount, this.ButtonArray);
         }
 
-        private void BoardButton_Focus(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void BoardButton_Click(object sender, RoutedEventArgs e)
-        {
-            MinesweeperButton toggledButton = sender as MinesweeperButton;
-
-            toggledButton.ToggleRevealed();
-            if (toggledButton.SurroundingMineCount == 0) RevealAllBlanks(toggledButton);
-            if (toggledButton.IsMine) GameOver();
-        }
-
-        private void GameOver()
+        public void GameOver()
         {
             for (var i = 0; i < this.ColumnCount; i++)
                 for (var j = 0; j < this.RowCount; j++)
                     this.ButtonArray[i, j].ToggleRevealed();
         }
 
-        private void RevealAllBlanks(MinesweeperButton toggledButton)
+        public void RevealAllBlanks(MinesweeperButton toggledButton)
         {
             for (int xoff = -1; xoff <= 1; xoff++)
             {

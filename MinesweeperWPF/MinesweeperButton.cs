@@ -11,6 +11,7 @@ namespace MinesweeperWPF
     class MinesweeperButton : Button
     {
         public bool IsMine { get; private set; }
+        public bool IsFlagged { get; private set; }
         public bool IsRevealed { get; private set; }
         public int SurroundingMineCount { get; set; }
         public int RowValue { get; set; }
@@ -19,6 +20,7 @@ namespace MinesweeperWPF
         public MinesweeperButton()
         {
             this.IsMine = false;
+            this.IsFlagged = false;
             this.IsRevealed = false;
             this.SurroundingMineCount = 0;
         }
@@ -26,6 +28,11 @@ namespace MinesweeperWPF
         public void SetMineOnButton()
         {
             this.IsMine = true;
+        }
+
+        public void ToggleFlagOnButton()
+        {
+            this.IsFlagged = this.IsFlagged ? false : true;
         }
 
         public void ToggleRevealed()
