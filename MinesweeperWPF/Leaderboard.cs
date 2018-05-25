@@ -13,8 +13,9 @@ namespace MinesweeperWPF
         public string mineCount { get; private set; }
         public string timeSpent { get; private set; }
         private static int playerCount { get; set; }
-        private static string filePath;
         private string existingText { get; set; }
+
+        private static string filePath;
 
         public Leaderboard(string playerName, string mineCount, string timeSpent)
         {
