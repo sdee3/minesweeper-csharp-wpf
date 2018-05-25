@@ -1,5 +1,4 @@
-﻿using Minesweeper.WPF;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -28,6 +27,7 @@ namespace MinesweeperWPF
         private static string playerName;
         private static Random random;
         private static MineGrid game;
+        private static Leaderboard leaderboardObject;
 
         private static DispatcherTimer gameTimer;
 
@@ -45,7 +45,7 @@ namespace MinesweeperWPF
         {
             columnCount = cols;
             rowCount = rows;
-            mineCount = 4;
+            mineCount = 2;
 
             gameTimer = new DispatcherTimer();
             gameTimer.Tick += gameTimer_Tick;
@@ -53,11 +53,11 @@ namespace MinesweeperWPF
 
             random = new Random();
 
-            for (int i = 0; i < columnCount; i++)
-                minesweeperGrid.ColumnDefinitions.Add(new ColumnDefinition());
-
             for (int i = 0; i < rowCount; i++)
                 minesweeperGrid.RowDefinitions.Add(new RowDefinition());
+
+            for (int i = 0; i < columnCount; i++)
+                minesweeperGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
             SetupAndDraw();
         }
@@ -73,9 +73,9 @@ namespace MinesweeperWPF
             timerTextBlock.Text = "0";
             game = new MineGrid(columnCount, rowCount, mineCount);
 
-            for (int i = 0; i < columnCount; i++)
+            for (int i = 0; i < rowCount; i++)
             {
-                for (int j = 0; j < rowCount; j++)
+                for (int j = 0; j < columnCount; j++)
                 {
                     Grid.SetColumn(game.ButtonArray[i,j], j);
                     Grid.SetRow(game.ButtonArray[i, j], i);
@@ -130,10 +130,23 @@ namespace MinesweeperWPF
                 if (toggledButton.IsMine)
                 {
                     buttonReset.Content = FindResource("mineclicked_emoji");
+                    gameTimer.Stop();
                     game.GameOver();
                 }
                 else
+                {
                     buttonReset.Content = FindResource("neutral_emoji");
+                    if (GameWon())
+                    {
+                        // INSERT CODE HERE
+                        buttonReset.Content = FindResource("gameover_emoji");
+                        gameTimer.Stop();
+                        game.GameOver();
+
+                        leaderboardObject = new Leaderboard(playerName, mineCount.ToString(), timerTextBlock.Text);
+                        leaderboardObject.WriteDataToFile();
+                    }
+                } 
             }
             else if(toggledButton.IsFlagged && (enableFlagButton.IsChecked ?? false))
             {
@@ -146,6 +159,15 @@ namespace MinesweeperWPF
 
                 remainingMinesImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\goodflag.png");
             }
+        }
+
+        private bool GameWon()
+        {
+            for (int i = 0; i < game.RowCount; i++)
+                for (int j = 0; j < game.ColumnCount; j++)
+                    if (!game.ButtonArray[i, j].IsRevealed && !game.ButtonArray[i, j].IsMine)
+                        return false;
+            return true;
         }
 
         private void BoardButton_Focus(object sender, RoutedEventArgs e)
@@ -166,7 +188,7 @@ namespace MinesweeperWPF
 
         private void buttonLeaderboard_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(File.ReadAllText(@"..\..\Assets\leaderboard.dat"));
+            MessageBox.Show(File.ReadAllText("leaderboard.dat"));
         }
 
         private void buttonReset_Click(object sender, RoutedEventArgs e)
