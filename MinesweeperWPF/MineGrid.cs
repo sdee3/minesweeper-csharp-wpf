@@ -66,18 +66,6 @@ namespace MinesweeperWPF
 
         public void GameOver()
         {
-            StackPanel goodFlagStackPanel = new StackPanel();
-            StackPanel badFlagStackPanel = new StackPanel();
-            goodFlagStackPanel.Orientation = badFlagStackPanel.Orientation = Orientation.Horizontal;
-
-            Image goodFlagImage = new Image();
-            Image badFlagImage = new Image();
-
-            goodFlagImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\goodflag.png");
-            goodFlagStackPanel.Children.Add(goodFlagImage);
-            badFlagImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\badflag.png");
-            badFlagStackPanel.Children.Add(badFlagImage);
-
             for (var i = 0; i < this.ColumnCount; i++)
                 for (var j = 0; j < this.RowCount; j++)
                 {
@@ -86,9 +74,26 @@ namespace MinesweeperWPF
                     if (this.ButtonArray[i, j].IsFlagged)
                     {
                         if (this.ButtonArray[i, j].IsMine)
+                        {
+                            StackPanel goodFlagStackPanel = new StackPanel();
+                            Image goodFlagImage = new Image();
+                            goodFlagStackPanel.Orientation = Orientation.Horizontal;
+                            goodFlagImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\goodflag.png");
+                            goodFlagStackPanel.Children.Add(goodFlagImage);
+
                             this.ButtonArray[i, j].Content = goodFlagStackPanel;
+                        }    
                         else
+                        {
+                            StackPanel badFlagStackPanel = new StackPanel();
+                            badFlagStackPanel.Orientation = Orientation.Horizontal;
+
+                            Image badFlagImage = new Image();
+                            badFlagImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\badflag.png");
+                            badFlagStackPanel.Children.Add(badFlagImage);
+
                             this.ButtonArray[i, j].Content = badFlagStackPanel;
+                        }   
                     }                        
                 }  
         }

@@ -45,7 +45,7 @@ namespace MinesweeperWPF
         {
             columnCount = cols;
             rowCount = rows;
-            mineCount = 2;
+            mineCount = mineC;
 
             gameTimer = new DispatcherTimer();
             gameTimer.Tick += gameTimer_Tick;
@@ -126,7 +126,9 @@ namespace MinesweeperWPF
             {
                 // If the target button is not flagged and the EnableFlagButton is turned OFF
                 toggledButton.ToggleRevealed();
+
                 if (toggledButton.SurroundingMineCount == 0) game.RevealAllBlanks(toggledButton);
+
                 if (toggledButton.IsMine)
                 {
                     buttonReset.Content = FindResource("mineclicked_emoji");
@@ -136,9 +138,9 @@ namespace MinesweeperWPF
                 else
                 {
                     buttonReset.Content = FindResource("neutral_emoji");
+
                     if (GameWon())
                     {
-                        // INSERT CODE HERE
                         buttonReset.Content = FindResource("gameover_emoji");
                         gameTimer.Stop();
                         game.GameOver();
