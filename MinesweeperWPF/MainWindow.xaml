@@ -30,6 +30,25 @@
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
 
+        <Storyboard x:Key="GameOverStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonReset">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1.083"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonReset">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1.083"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonReset">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-15"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="-2.5"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonReset">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="15"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="2.5"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
     </Window.Resources>
 
     <Grid Name="mainGrid">
@@ -64,7 +83,7 @@
                 VerticalAlignment="Center"
                 Margin="-70,0,0,0"
             />
-            
+
             <Image 
                 Name="remainingMinesImage"
                 Grid.Column="0"
@@ -95,8 +114,16 @@
                 VerticalAlignment="Center"
                 Content="{StaticResource neutral_emoji}"
                 Click="buttonReset_Click"
-                Style="{StaticResource buttonStyle}"
+                Style="{StaticResource buttonStyle}" RenderTransformOrigin="0.5,0.5"
             >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
             </Button>
 
         </Grid>

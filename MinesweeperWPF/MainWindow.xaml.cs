@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -134,6 +135,7 @@ namespace MinesweeperWPF
                     buttonReset.Content = FindResource("mineclicked_emoji");
                     gameTimer.Stop();
                     game.GameOver();
+                    StartAnimation();
                 }
                 else
                 {
@@ -147,6 +149,8 @@ namespace MinesweeperWPF
 
                         leaderboardObject = new Leaderboard(playerName, mineCount.ToString(), timerTextBlock.Text);
                         leaderboardObject.WriteDataToFile();
+
+                        StartAnimation();
                     }
                 } 
             }
@@ -161,6 +165,13 @@ namespace MinesweeperWPF
 
                 remainingMinesImage.Source = ImageWorker.GenerateImage(@"..\..\Assets\goodflag.png");
             }
+        }
+
+        private void StartAnimation()
+        {
+            Storyboard storyboard = this.FindResource("GameOverStoryboard") as Storyboard;
+            Storyboard.SetTarget(storyboard, this.buttonReset);
+            storyboard.Begin();
         }
 
         private bool GameWon()
