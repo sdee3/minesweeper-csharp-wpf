@@ -65,13 +65,13 @@ namespace MinesweeperWPF
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            timerTextBlock.Text = (++secondsElapsed).ToString();
+            timerTextBlock.Text = (++secondsElapsed).ToString() + "s";
         }
 
         private void SetupAndDraw()
         {
             secondsElapsed = 0;
-            timerTextBlock.Text = "0";
+            timerTextBlock.Text = "0s";
             game = new MineGrid(columnCount, rowCount, mineCount);
 
             for (int i = 0; i < rowCount; i++)

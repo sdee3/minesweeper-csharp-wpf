@@ -19,6 +19,7 @@
         <Image Source="Assets/mineopening-emoji.png" x:Key="mineopening_emoji"></Image>
         <Image Source="Assets/neutral-emoji.png" x:Key="neutral_emoji"></Image>
         <Image Source="Assets/explosion.gif" x:Key="img_explosion"></Image>
+        <Image Source="Assets/clock_image.png" x:Key="clock_image" />
 
         <Style x:Key="buttonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
@@ -194,6 +195,18 @@
 
             </Button>
 
+            <Button 
+                Content ="{StaticResource clock_image}"
+                HorizontalAlignment="Center"
+                Width="35"
+                Background="Transparent"
+                Grid.Column="1"
+                Margin="-120 10 0 0"
+                Height="35"
+                VerticalAlignment="Center"
+                Style="{StaticResource buttonStyle}"
+            ></Button>
+
             <TextBlock
                 Name="timerTextBlock"
                 Text="0"
@@ -201,6 +214,7 @@
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
+                Margin="50 0 0 0"
             />
         </Grid>
     </Grid>
