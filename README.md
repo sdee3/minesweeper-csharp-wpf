@@ -5,7 +5,7 @@ Koristeći tehnologije UWA ili WPF napraviti Minesweeper igricu.
 
 Primer igrice možete videti na slici.
 
-[minesweeper game example image](https://image.prntscr.com/image/LjGJvaTKQECVL9q6Te6LZQ.png)
+![minesweeper game example image](https://image.prntscr.com/image/LjGJvaTKQECVL9q6Te6LZQ.png)
 
 Pre početka aplikacije potrebno je uneti ime igrača i izabrati težinu. Postoje tri tipa težine: easy (10x10 sa 30 mina), medium (12x12 sa 45 mina) i hard (14x14 sa 60 mina).
 
