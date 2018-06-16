@@ -46,7 +46,7 @@ namespace MinesweeperWPF
         {
             columnCount = cols;
             rowCount = rows;
-            mineCount = mineC;
+            mineCount = 3;
 
             gameTimer = new DispatcherTimer();
             gameTimer.Tick += gameTimer_Tick;
