@@ -167,5 +167,8 @@
     <Resource Include="Assets\badflag.png" />
     <Resource Include="Assets\goodflag.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\clock_image.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -46,7 +46,7 @@ namespace MinesweeperWPF
         {
             columnCount = cols;
             rowCount = rows;
-            mineCount = 3;
+            mineCount = mineC;
 
             gameTimer = new DispatcherTimer();
             gameTimer.Tick += gameTimer_Tick;
@@ -65,13 +65,13 @@ namespace MinesweeperWPF
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            timerTextBlock.Text = (++secondsElapsed).ToString();
+            timerTextBlock.Text = (++secondsElapsed).ToString() + "s";
         }
 
         private void SetupAndDraw()
         {
             secondsElapsed = 0;
-            timerTextBlock.Text = "0";
+            timerTextBlock.Text = "0s";
             game = new MineGrid(columnCount, rowCount, mineCount);
 
             for (int i = 0; i < rowCount; i++)
@@ -201,7 +201,18 @@ namespace MinesweeperWPF
 
         private void buttonLeaderboard_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(File.ReadAllText("leaderboard.dat"));
+            if (File.Exists("leaderboard.dat"))
+            {
+                if (File.ReadAllText("leaderboard.dat").Length != 0)
+                    MessageBox.Show(File.ReadAllText("leaderboard.dat"));
+                else
+                    MessageBox.Show("Leaderboard empty!");
+            }
+            else
+            {
+                File.Create("leaderboard.dat");
+                MessageBox.Show("Leaderboard empty!");
+            }
         }
 
         private void buttonReset_Click(object sender, RoutedEventArgs e)
